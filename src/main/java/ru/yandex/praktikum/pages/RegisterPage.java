@@ -1,17 +1,17 @@
-package ru.yandex.praktikum.pageobject;
+package ru.yandex.praktikum.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import ru.yandex.praktikum.UserUtils.User;
+import ru.yandex.praktikum.user.User;
 
 import java.time.Duration;
 
 public class RegisterPage {
     private WebDriver driver;
-    public final String REGISTERPAGE_URL = "https://stellarburgers.nomoreparties.site/register";
+    public static final String REGISTERPAGE_URL = "https://stellarburgers.nomoreparties.site/register";
 
     public RegisterPage(WebDriver driver) {
         this.driver = driver;

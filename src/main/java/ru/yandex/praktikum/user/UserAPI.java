@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.UserUtils;
+package ru.yandex.praktikum.user;
 
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
@@ -8,6 +8,9 @@ import static io.restassured.RestAssured.given;
 
 public class UserAPI {
     private static final String BASE_URI = "https://stellarburgers.nomoreparties.site";
+    public static final String REGISTER_USER_PATH = "/api/auth/register";
+    public static final String LOGIN_USER_PATH = "/api/auth/login";
+    public static final String USER_INFO_PATH = "/api/auth/user";
 
     @Step("Method for get API base URI")
     public static String getAPIBaseURI(){
@@ -22,7 +25,7 @@ public class UserAPI {
                         .header("Content-type", "application/json")
                         .body(user)
                         .when()
-                        .post("/api/auth/register");
+                        .post(REGISTER_USER_PATH);
         return response;
     }
 
@@ -32,7 +35,7 @@ public class UserAPI {
                 given()
                         .header("Content-Type", "application/json")
                         .body(user)
-                        .post("api/auth/login")
+                        .post(LOGIN_USER_PATH)
                         .then()
                         .extract()
                         .path("accessToken");
@@ -46,7 +49,7 @@ public class UserAPI {
                 given()
                         .header("Authorization", accessToken)
                         .when()
-                        .delete("/api/auth/user");
+                        .delete(USER_INFO_PATH);
 
     }
 }

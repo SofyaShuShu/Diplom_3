@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.UserUtils;
+package ru.yandex.praktikum.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

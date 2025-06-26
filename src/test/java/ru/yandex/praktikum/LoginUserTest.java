@@ -1,19 +1,20 @@
 package ru.yandex.praktikum;
 
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.UserUtils.User;
-import ru.yandex.praktikum.UserUtils.UserAPI;
-import ru.yandex.praktikum.UserUtils.UserRandomCreate;
-import ru.yandex.praktikum.pageobject.LoginPage;
-import ru.yandex.praktikum.pageobject.MainPage;
-import ru.yandex.praktikum.pageobject.PasswordRecoveryPage;
-import ru.yandex.praktikum.pageobject.RegisterPage;
+import ru.yandex.praktikum.user.User;
+import ru.yandex.praktikum.user.UserAPI;
+import ru.yandex.praktikum.user.UserRandomCreate;
+import ru.yandex.praktikum.pages.LoginPage;
+import ru.yandex.praktikum.pages.MainPage;
+import ru.yandex.praktikum.pages.PasswordRecoveryPage;
+import ru.yandex.praktikum.pages.RegisterPage;
 
 public class LoginUserTest {
     private WebDriver driver;
@@ -32,9 +33,9 @@ public class LoginUserTest {
         Response createResponse = UserAPI.userCreate(user);
     }
 
-    @Step("Login test with click on login to account button on main page")
+    @DisplayName("Login test with click on login to account button on main page")
     @Test
-    public void loginUserTestWithLoginButton(){
+    public void loginUserTestWithLoginButtonTest(){
         MainPage objMainPage = new MainPage(driver);
         objMainPage.openMainPage();
         objMainPage.clickLogInToAccountButton();
@@ -45,9 +46,9 @@ public class LoginUserTest {
     }
 
 
-@Step("Login test with click on personal cabinet button on main page")
+@DisplayName("Login test with click on personal cabinet button on main page")
 @Test
-public void loginUserTestWithPersonalCabinetButton(){
+public void loginUserTestWithPersonalCabinetButtonTest(){
     MainPage objMainPage = new MainPage(driver);
     objMainPage.openMainPage();
     objMainPage.clickPersonalCabinetButton();
@@ -57,9 +58,9 @@ public void loginUserTestWithPersonalCabinetButton(){
     Assert.assertTrue(objMainPage.isMakeOrderButtonVisible());
     }
 
-@Step("Login test with click on enter button on registration page")
+@DisplayName("Login test with click on enter button on registration page")
 @Test
-public void loginUserTestWithEnterButtonOnRegistrationPage(){
+public void loginUserTestWithEnterButtonOnRegistrationPageTest(){
     RegisterPage objRegisterPage = new RegisterPage(driver);
     objRegisterPage.openRegisterPage();
     objRegisterPage.clickEnterButtonOnRegisterPage();
@@ -70,9 +71,9 @@ public void loginUserTestWithEnterButtonOnRegistrationPage(){
     Assert.assertTrue(objMainPage.isMakeOrderButtonVisible());
     }
 
-    @Step("Login test with click on enter button on password recovery page")
+    @DisplayName("Login test with click on enter button on password recovery page")
     @Test
-    public void loginUserTestWithEnterButtonOnPasswordrecoveryPagePage(){
+    public void loginUserTestWithEnterButtonOnPasswordRecoveryPagePageTest(){
         LoginPage objLoginPage = new LoginPage(driver);
         objLoginPage.openLoginPage();
         objLoginPage.clickRecoveryPasswordButton();

@@ -3,6 +3,7 @@ package ru.yandex.praktikum;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,16 +15,18 @@ public class BasicUtils {
     public BasicUtils() {
         this.browserFactory = new BrowserFactory();
     }
-    @Step("Method for for selecting the browser (Chrome or Yandex Browser)")
+    @Step("Method for selecting the browser automatically based on system settings")
     public String chooseBrowser() {
-          Scanner scanner = new Scanner(System.in);
-         System.out.println("Введите название браузера (Chrome или Yandex) или нажмите Enter для использования Яндекс.браузера: ");
-         String browser = scanner.nextLine().toLowerCase();
-        // String browser = "yandex";
+        String browser = System.getProperty("browser", "chrome").toLowerCase();
+        String[] supportedBrowsers = {"chrome", "yandex"};
 
-        if (browser.isEmpty()) {
-            browser = "yandex";
+        boolean isSupported = Arrays.asList(supportedBrowsers).contains(browser);
+
+        if (!isSupported) {
+            System.out.println("Браузер не поддерживается, тесты будут выполнены Chrome по умолчанию.");
+            browser = "chrome";
         }
+
         return browser;
     }
 
@@ -37,14 +40,6 @@ public class BasicUtils {
         driver.manage().window().maximize();
     }
 
-    @Step("Method for waiting for a certain time")
-    public void waitForCertainTime(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
     @Step("Method for completes the web driver process")
     public void tearDown() {
         if (driver != null) {

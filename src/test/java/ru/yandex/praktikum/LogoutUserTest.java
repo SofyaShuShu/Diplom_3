@@ -1,18 +1,19 @@
 package ru.yandex.praktikum;
 
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.UserUtils.User;
-import ru.yandex.praktikum.UserUtils.UserAPI;
-import ru.yandex.praktikum.UserUtils.UserRandomCreate;
-import ru.yandex.praktikum.pageobject.LoginPage;
-import ru.yandex.praktikum.pageobject.MainPage;
-import ru.yandex.praktikum.pageobject.PersonalCabinetPage;
+import ru.yandex.praktikum.user.User;
+import ru.yandex.praktikum.user.UserAPI;
+import ru.yandex.praktikum.user.UserRandomCreate;
+import ru.yandex.praktikum.pages.LoginPage;
+import ru.yandex.praktikum.pages.MainPage;
+import ru.yandex.praktikum.pages.PersonalCabinetPage;
 
 
 public class LogoutUserTest {
@@ -30,9 +31,9 @@ public class LogoutUserTest {
         user = new UserRandomCreate().createNewUser();
         Response createResponse = UserAPI.userCreate(user);
     }
-    @Step("Test logout from click on exit button on personal cabinet page")
+    @DisplayName("Test logout from click on exit button on personal cabinet page")
     @Test
-    public void logOutFromPersonalCabinet() {
+    public void logOutFromPersonalCabinetTest() {
         MainPage objMainPage = new MainPage(driver);
         objMainPage.openMainPage();
         objMainPage.clickPersonalCabinetButton();

@@ -2,19 +2,19 @@ package ru.yandex.praktikum;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import io.restassured.RestAssured;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.UserUtils.User;
-import ru.yandex.praktikum.UserUtils.UserAPI;
-import ru.yandex.praktikum.UserUtils.UserRandomCreate;
-import ru.yandex.praktikum.pageobject.LoginPage;
-import ru.yandex.praktikum.pageobject.MainPage;
-import ru.yandex.praktikum.pageobject.PersonalCabinetPage;
+import ru.yandex.praktikum.user.User;
+import ru.yandex.praktikum.user.UserAPI;
+import ru.yandex.praktikum.user.UserRandomCreate;
+import ru.yandex.praktikum.pages.LoginPage;
+import ru.yandex.praktikum.pages.MainPage;
+import ru.yandex.praktikum.pages.PersonalCabinetPage;
 
 
 public class FollowsTest {
@@ -33,9 +33,9 @@ public class FollowsTest {
         Response createResponse = UserAPI.userCreate(user);
     }
 
-    @Step("Test follow on personal cabinet for authorization user")
+    @DisplayName("Test follow on personal cabinet for authorization user")
     @Test
-    public void followOnPersonalCabinetForAuthorizationUser() {
+    public void followOnPersonalCabinetForAuthorizationUserTest() {
         MainPage objMainPage = new MainPage(driver);
         objMainPage.openMainPage();
         objMainPage.clickPersonalCabinetButton();
@@ -50,9 +50,9 @@ public class FollowsTest {
         Assert.assertEquals("Страница личного кабинета не открылась", objPersonalCabinetPage.PERSONALCABINETPAGE_URL, currentUrl);
     }
 
-    @Step("Test follow on personal cabinet for unauthorized user")
+    @DisplayName("Test follow on personal cabinet for unauthorized user")
     @Test
-    public void followOnPersonalCabinetForUnauthorizedUser() {
+    public void followOnPersonalCabinetForUnauthorizedUserTest() {
         MainPage objMainPage = new MainPage(driver);
         objMainPage.openMainPage();
         objMainPage.clickPersonalCabinetButton();
@@ -64,9 +64,9 @@ public class FollowsTest {
     }
 
     @Description("Constructor is located on the main page")
-    @Step("Test switching from personal cabinet to the constructor")
+    @DisplayName("Test switching from personal cabinet to the constructor")
     @Test
-    public void followFromPersonalCabinetToConstructor() {
+    public void followFromPersonalCabinetToConstructorTest() {
         MainPage objMainPage = new MainPage(driver);
         objMainPage.openMainPage();
         objMainPage.clickPersonalCabinetButton();
@@ -82,9 +82,9 @@ public class FollowsTest {
         Assert.assertEquals("Главная страница не открылась", objMainPage.MAINPAGE_URL, currentUrl);
     }
 
-    @Step("Test switching from personal cabinet to the main page by logo")
+    @DisplayName("Test switching from personal cabinet to the main page by logo")
     @Test
-    public void followFromPersonalCabinetToMainPageByLogo() {
+    public void followFromPersonalCabinetToMainPageByLogoTest() {
         MainPage objMainPage = new MainPage(driver);
         objMainPage.openMainPage();
         objMainPage.clickPersonalCabinetButton();

@@ -1,22 +1,24 @@
 package ru.yandex.praktikum;
 
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.UserUtils.User;
-import ru.yandex.praktikum.UserUtils.UserAPI;
-import ru.yandex.praktikum.UserUtils.UserRandomCreate;
-import ru.yandex.praktikum.pageobject.LoginPage;
-import ru.yandex.praktikum.pageobject.MainPage;
-import ru.yandex.praktikum.pageobject.RegisterPage;
+import ru.yandex.praktikum.user.User;
+import ru.yandex.praktikum.user.UserAPI;
+import ru.yandex.praktikum.user.UserRandomCreate;
+import ru.yandex.praktikum.pages.LoginPage;
+import ru.yandex.praktikum.pages.MainPage;
+import ru.yandex.praktikum.pages.RegisterPage;
 
 public class RegisterUserTest {
     private WebDriver driver;
     private BasicUtils utils;
     private User user;
+    private static final String EXPECTED_MESSAGE = "Некорректный пароль";
 
     @Before
     @Step("Method for launching a web driver and API base URI")
@@ -27,7 +29,7 @@ public class RegisterUserTest {
         String baseURI = UserAPI.getAPIBaseURI();
     }
 
-    @Step("Method for testing successful registration with valid user data.")
+    @DisplayName("Method for testing successful registration with valid user data.")
     @Test
     public void registerUserTest(){
         user = new UserRandomCreate().createNewUser();
@@ -43,7 +45,7 @@ public class RegisterUserTest {
         Assert.assertTrue(objMainPage.isMakeOrderButtonVisible());
     }
 
-    @Step("Method checks the error message when the password is less than 6 characters long.")
+    @DisplayName("Method checks the error message when the password is less than 6 characters long.")
     @Test
     public void shortPasswordErrorMassageTest(){
         user = new UserRandomCreate().createNewUserWithShortPassword();
@@ -58,9 +60,8 @@ public class RegisterUserTest {
 
 
         String actualMessage = objRegisterPage.getTextOfPasswordErrorMessage();
-        String expectedMessage = "Некорректный пароль";
 
-        Assert.assertTrue("Сообщение об ошибке не появилось", actualMessage.equals(expectedMessage));
+        Assert.assertTrue("Сообщение об ошибке не появилось", actualMessage.equals(EXPECTED_MESSAGE));
     }
 
     @After

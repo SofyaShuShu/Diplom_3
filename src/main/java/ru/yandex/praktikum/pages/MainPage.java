@@ -1,9 +1,10 @@
-package ru.yandex.praktikum.pageobject;
+package ru.yandex.praktikum.pages;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -11,7 +12,7 @@ import java.time.Duration;
 
 public class MainPage {
     private WebDriver driver;
-    public final String MAINPAGE_URL = "https://stellarburgers.nomoreparties.site/";
+    public static final String MAINPAGE_URL = "https://stellarburgers.nomoreparties.site/";
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -34,6 +35,15 @@ public class MainPage {
 
     //Локатор раздела "Соусы"
     private By menuSauces = By.xpath(".//span[text()='Соусы']");
+
+    //Локатор выбранного раздела "Булки"
+    private By currentMenuBread = By.xpath("//div[contains(@class,'tab_type_current__2BEPc')]//span[text()='Булки']");
+
+    //Локатор выбранного раздела "Соусы"
+    private By currentMenuSauces = By.xpath("//div[contains(@class,'tab_type_current__2BEPc')]//span[text()='Соусы']");
+
+    //Локатор выбранного раздела "Начинки"
+    private By currentMenuFillings = By.xpath("//div[contains(@class,'tab_type_current__2BEPc')]//span[text()='Начинки']");
 
     //Локатор выбранного раздела конструктора
     private By currentSection = By.xpath(".//div[contains(@class,'tab_type_current__2BEPc')]");
@@ -65,7 +75,7 @@ public class MainPage {
 
     @Step("Click on Bread section")
     public void clickMenuBread() {
-         driver.findElement(menuBread).click();
+        driver.findElement(menuBread).click();
     }
 
     @Step("Click on Sauces section")
@@ -75,7 +85,7 @@ public class MainPage {
 
     @Step("Click on Fillings section")
     public void clickMenuFillings() {
-         driver.findElement(menuFillings).click();
+        driver.findElement(menuFillings).click();
     }
 
     @Description("Since the make order button only appears on the main page of an authorized user, the method is used to verify successful authorization.")
@@ -103,5 +113,41 @@ public class MainPage {
     @Step("Method for determining locator of make order button")
     public By getMakeOrderButtonLocator() {
     return makeOrderButton;
+    }
+
+    @Description("The text color of the selected menu section changes to \"#fff\" according to the CSS, and the method waits for the color to change in the selected section.")
+    @Step("Method for waiting, that bread section is active")
+    public void waitBreadSectionActive(){
+        WebElement element = driver.findElement(currentMenuBread);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(driver -> {
+            String color = element.getCssValue("color");
+            return color.equals("rgba(255, 255, 255, 1)");
+        });
+    }
+
+    @Description("The text color of the selected menu section changes to \"#fff\" according to the CSS, and the method waits for the color to change in the selected section.")
+    @Step("Method for waiting, that souse section is active")
+    public void waitSouseSectionActive(){
+        WebElement element = driver.findElement(currentMenuSauces);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(driver -> {
+            String color = element.getCssValue("color");
+            return color.equals("rgba(255, 255, 255, 1)");
+        });
+    }
+
+    @Description("The text color of the selected menu section changes to \"#fff\" according to the CSS, and the method waits for the color to change in the selected section.")
+    @Step("Method for waiting, that fillings section is active")
+    public void waitFillingsSectionActive(){
+        WebElement element = driver.findElement(currentMenuFillings);
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(driver -> {
+            String color = element.getCssValue("color");
+            return color.equals("rgba(255, 255, 255, 1)");
+        });
     }
 }

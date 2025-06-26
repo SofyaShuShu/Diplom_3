@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.pageobject;
+package ru.yandex.praktikum.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class PersonalCabinetPage {
     private WebDriver driver;
-    public final String PERSONALCABINETPAGE_URL = "https://stellarburgers.nomoreparties.site/account/profile";
+    public static final String PERSONALCABINETPAGE_URL = "https://stellarburgers.nomoreparties.site/account/profile";
 
     public PersonalCabinetPage(WebDriver driver) {
         this.driver = driver;

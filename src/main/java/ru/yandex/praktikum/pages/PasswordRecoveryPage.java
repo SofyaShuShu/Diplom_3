@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.pageobject;
+package ru.yandex.praktikum.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -10,7 +10,7 @@ import java.time.Duration;
 
 public class PasswordRecoveryPage {
     private WebDriver driver;
-    public final String PASSWORDRECOVERYPAGE_URL = "https://stellarburgers.nomoreparties.site/forgot-password";
+    public static final String PASSWORDRECOVERYPAGE_URL = "https://stellarburgers.nomoreparties.site/forgot-password";
 
     public PasswordRecoveryPage(WebDriver driver) {
         this.driver = driver;
